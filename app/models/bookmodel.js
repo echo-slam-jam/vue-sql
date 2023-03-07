@@ -1,4 +1,4 @@
-const sql = require("./db.js");
+const sql = require("./db.js"); // uses the exported "connection" module
 
 const Book = function(book) {
     this.title = book.title;
