@@ -1,4 +1,48 @@
 const Book = require("../models/bookmodel.js");
+const db = require("../models/db"); // uses the exported "connection" module
+
+exports.findAll2 = (req, res) => {
+  let input = 'SELECT * FROM books'
+  db.query(input, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.send(result)
+  })
+}
+exports.findOne2 = (req, res) => {
+  let input = `SELECT * FROM books 
+                WHERE id = ${req.params.id}`
+  db.query(input, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.send(result)
+  })
+}
+exports.create2 = (req, res) => {
+  let input = `INSERT INTO books SET ?`
+  let inputData = {
+    title: req.body.title,
+    description: req.body.description,
+    published: req.body.published || false,
+  }
+  db.query(input, inputData, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.send(result)
+  })
+}
+exports.search = (req, res) => {
+  let input = `SELECT * FROM books WHERE ${req.body.column} LIKE '%${req.body.text}%'`;
+  db.query(input, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.send(result); 
+});
+}
 
 exports.create = (req, res) => {
     if (!req.body) {

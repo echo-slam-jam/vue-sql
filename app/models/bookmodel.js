@@ -1,6 +1,6 @@
 const sql = require("./db.js"); // uses the exported "connection" module
 
-const Book = function(book) {
+const Book = function(book) { //creates object
     this.title = book.title;
     this.description = book.description;
     this.published = book.published;
